@@ -1,16 +1,33 @@
 module.exports = {
-    'Step one: navigate to LinkedIn': function(browser){
-        browser
-        .url('https://www.linkedin.com/')
-        .pause(10000);
+    //Step one does the first part or the test, verifies "acceder button"
+    'Step one: Youtube Home Page': function(browser){
+        //This part does the homePage instance to call the method
+        var homePage = browser.page.homePage();
+        //HomePage object now calls the signin method which has all the logic
+        homePage.navigate()
+        .signin();
     },
-    'step one: navigate to google' : function (browser) {
-    browser
-      .url('https://www.google.com')
-      //.waitForElementVisible('body', 1000)
-      .pause(1000)
-      .setValue('input[type=text]', 'nightwatch')
-      
-      //.waitForElementVisible('input[name=btnK]', 1000)
+    'step two: Left Page' : function (browser) {
+        //Page object instance (left menu page)
+        var leftPage = browser.page.leftMenuPage();
+        //call the command that has the logic fot this page 
+        leftPage.leftElements();
+        leftPage.expectMenu();
+        leftPage.expectTrending();
+        leftPage.expectSubscriptions();
+  },
+  'step three: Dot Square Menu' : function (browser) {
+      //Dot Sqaure Menu page instance
+        var dotMenu = browser.page.dotSquarePage();
+        //Call method from the dot square menu page to do the logic 
+        dotMenu.selectDotMenu();
+        fotMenu.getMenuText();
+  },'step four: Result Page' : function (browser) {
+    var search = browser.page.resultPage();
+        search.searchVideo();
+        search.expectVideo();
+        search.printViews();
+        search.failAssert();
+        search.takeScreenshot();
   }
-}
+};
